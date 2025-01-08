@@ -30,6 +30,10 @@ type ClusterInterface interface {
 	ValidatingAdmissionPolicies() ValidatingAdmissionPolicyClusterInformer
 	// ValidatingAdmissionPolicyBindings returns a ValidatingAdmissionPolicyBindingClusterInformer
 	ValidatingAdmissionPolicyBindings() ValidatingAdmissionPolicyBindingClusterInformer
+	// MutatingAdmissionPolicies returns a MutatingAdmissionPolicyClusterInformer
+	MutatingAdmissionPolicies() MutatingAdmissionPolicyClusterInformer
+	// MutatingAdmissionPolicyBindings returns a MutatingAdmissionPolicyBindingClusterInformer
+	MutatingAdmissionPolicyBindings() MutatingAdmissionPolicyBindingClusterInformer
 }
 
 type version struct {
@@ -50,4 +54,14 @@ func (v *version) ValidatingAdmissionPolicies() ValidatingAdmissionPolicyCluster
 // ValidatingAdmissionPolicyBindings returns a ValidatingAdmissionPolicyBindingClusterInformer
 func (v *version) ValidatingAdmissionPolicyBindings() ValidatingAdmissionPolicyBindingClusterInformer {
 	return &validatingAdmissionPolicyBindingClusterInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// MutatingAdmissionPolicies returns a MutatingAdmissionPolicyClusterInformer
+func (v *version) MutatingAdmissionPolicies() MutatingAdmissionPolicyClusterInformer {
+	return &mutatingAdmissionPolicyClusterInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
+}
+
+// MutatingAdmissionPolicyBindings returns a MutatingAdmissionPolicyBindingClusterInformer
+func (v *version) MutatingAdmissionPolicyBindings() MutatingAdmissionPolicyBindingClusterInformer {
+	return &mutatingAdmissionPolicyBindingClusterInformer{factory: v.factory, tweakListOptions: v.tweakListOptions}
 }

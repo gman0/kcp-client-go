@@ -219,3 +219,11 @@ func (c *podsClient) UpdateEphemeralContainers(ctx context.Context, podName stri
 	}
 	return obj.(*corev1.Pod), err
 }
+
+func (c *podsClient) UpdateResize(ctx context.Context, podName string, pod *corev1.Pod, opts metav1.UpdateOptions) (*corev1.Pod, error) {
+	obj, err := c.Fake.Invokes(kcptesting.NewUpdateSubresourceAction(podsResource, c.ClusterPath, "resize", c.Namespace, pod), &corev1.Pod{})
+	if obj == nil {
+		return nil, err
+	}
+	return obj.(*corev1.Pod), err
+}

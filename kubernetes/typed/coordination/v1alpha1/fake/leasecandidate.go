@@ -28,14 +28,14 @@ import (
 
 	"github.com/kcp-dev/logicalcluster/v3"
 
-	coordinationv1alpha1 "k8s.io/api/coordination/v1alpha1"
+	coordinationv1alpha1 "k8s.io/api/coordination/v1alpha2"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/labels"
 	"k8s.io/apimachinery/pkg/runtime/schema"
 	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/apimachinery/pkg/watch"
-	applyconfigurationscoordinationv1alpha1 "k8s.io/client-go/applyconfigurations/coordination/v1alpha1"
-	coordinationv1alpha1client "k8s.io/client-go/kubernetes/typed/coordination/v1alpha1"
+	applyconfigurationscoordinationv1alpha1 "k8s.io/client-go/applyconfigurations/coordination/v1alpha2"
+	coordinationv1alpha1client "k8s.io/client-go/kubernetes/typed/coordination/v1alpha2"
 	"k8s.io/client-go/testing"
 
 	kcpcoordinationv1alpha1 "github.com/kcp-dev/client-go/kubernetes/typed/coordination/v1alpha1"

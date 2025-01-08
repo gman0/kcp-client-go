@@ -24,66 +24,66 @@ package fake
 import (
 	"github.com/kcp-dev/logicalcluster/v3"
 
-	resourcev1alpha3 "k8s.io/client-go/kubernetes/typed/resource/v1alpha3"
+	resourcev1beta1 "k8s.io/client-go/kubernetes/typed/resource/v1beta1"
 	"k8s.io/client-go/rest"
 
-	kcpresourcev1alpha3 "github.com/kcp-dev/client-go/kubernetes/typed/resource/v1alpha3"
+	kcpresourcev1beta1 "github.com/kcp-dev/client-go/kubernetes/typed/resource/v1beta1"
 	kcptesting "github.com/kcp-dev/client-go/third_party/k8s.io/client-go/testing"
 )
 
-var _ kcpresourcev1alpha3.ResourceV1alpha3ClusterInterface = (*ResourceV1alpha3ClusterClient)(nil)
+var _ kcpresourcev1beta1.ResourceV1beta1ClusterInterface = (*ResourceV1beta1ClusterClient)(nil)
 
-type ResourceV1alpha3ClusterClient struct {
+type ResourceV1beta1ClusterClient struct {
 	*kcptesting.Fake
 }
 
-func (c *ResourceV1alpha3ClusterClient) Cluster(clusterPath logicalcluster.Path) resourcev1alpha3.ResourceV1alpha3Interface {
+func (c *ResourceV1beta1ClusterClient) Cluster(clusterPath logicalcluster.Path) resourcev1beta1.ResourceV1beta1Interface {
 	if clusterPath == logicalcluster.Wildcard {
 		panic("A specific cluster must be provided when scoping, not the wildcard.")
 	}
-	return &ResourceV1alpha3Client{Fake: c.Fake, ClusterPath: clusterPath}
+	return &ResourceV1beta1Client{Fake: c.Fake, ClusterPath: clusterPath}
 }
 
-func (c *ResourceV1alpha3ClusterClient) ResourceSlices() kcpresourcev1alpha3.ResourceSliceClusterInterface {
+func (c *ResourceV1beta1ClusterClient) ResourceSlices() kcpresourcev1beta1.ResourceSliceClusterInterface {
 	return &resourceSlicesClusterClient{Fake: c.Fake}
 }
 
-func (c *ResourceV1alpha3ClusterClient) ResourceClaims() kcpresourcev1alpha3.ResourceClaimClusterInterface {
+func (c *ResourceV1beta1ClusterClient) ResourceClaims() kcpresourcev1beta1.ResourceClaimClusterInterface {
 	return &resourceClaimsClusterClient{Fake: c.Fake}
 }
 
-func (c *ResourceV1alpha3ClusterClient) DeviceClasses() kcpresourcev1alpha3.DeviceClassClusterInterface {
+func (c *ResourceV1beta1ClusterClient) DeviceClasses() kcpresourcev1beta1.DeviceClassClusterInterface {
 	return &deviceClassesClusterClient{Fake: c.Fake}
 }
 
-func (c *ResourceV1alpha3ClusterClient) ResourceClaimTemplates() kcpresourcev1alpha3.ResourceClaimTemplateClusterInterface {
+func (c *ResourceV1beta1ClusterClient) ResourceClaimTemplates() kcpresourcev1beta1.ResourceClaimTemplateClusterInterface {
 	return &resourceClaimTemplatesClusterClient{Fake: c.Fake}
 }
 
-var _ resourcev1alpha3.ResourceV1alpha3Interface = (*ResourceV1alpha3Client)(nil)
+var _ resourcev1beta1.ResourceV1beta1Interface = (*ResourceV1beta1Client)(nil)
 
-type ResourceV1alpha3Client struct {
+type ResourceV1beta1Client struct {
 	*kcptesting.Fake
 	ClusterPath logicalcluster.Path
 }
 
-func (c *ResourceV1alpha3Client) RESTClient() rest.Interface {
+func (c *ResourceV1beta1Client) RESTClient() rest.Interface {
 	var ret *rest.RESTClient
 	return ret
 }
 
-func (c *ResourceV1alpha3Client) ResourceSlices() resourcev1alpha3.ResourceSliceInterface {
+func (c *ResourceV1beta1Client) ResourceSlices() resourcev1beta1.ResourceSliceInterface {
 	return &resourceSlicesClient{Fake: c.Fake, ClusterPath: c.ClusterPath}
 }
 
-func (c *ResourceV1alpha3Client) ResourceClaims(namespace string) resourcev1alpha3.ResourceClaimInterface {
+func (c *ResourceV1beta1Client) ResourceClaims(namespace string) resourcev1beta1.ResourceClaimInterface {
 	return &resourceClaimsClient{Fake: c.Fake, ClusterPath: c.ClusterPath, Namespace: namespace}
 }
 
-func (c *ResourceV1alpha3Client) DeviceClasses() resourcev1alpha3.DeviceClassInterface {
+func (c *ResourceV1beta1Client) DeviceClasses() resourcev1beta1.DeviceClassInterface {
 	return &deviceClassesClient{Fake: c.Fake, ClusterPath: c.ClusterPath}
 }
 
-func (c *ResourceV1alpha3Client) ResourceClaimTemplates(namespace string) resourcev1alpha3.ResourceClaimTemplateInterface {
+func (c *ResourceV1beta1Client) ResourceClaimTemplates(namespace string) resourcev1beta1.ResourceClaimTemplateInterface {
 	return &resourceClaimTemplatesClient{Fake: c.Fake, ClusterPath: c.ClusterPath, Namespace: namespace}
 }

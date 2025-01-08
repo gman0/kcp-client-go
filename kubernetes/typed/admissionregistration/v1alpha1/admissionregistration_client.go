@@ -35,6 +35,8 @@ type AdmissionregistrationV1alpha1ClusterInterface interface {
 	AdmissionregistrationV1alpha1ClusterScoper
 	ValidatingAdmissionPoliciesClusterGetter
 	ValidatingAdmissionPolicyBindingsClusterGetter
+	MutatingAdmissionPoliciesClusterGetter
+	MutatingAdmissionPolicyBindingsClusterGetter
 }
 
 type AdmissionregistrationV1alpha1ClusterScoper interface {
@@ -58,6 +60,14 @@ func (c *AdmissionregistrationV1alpha1ClusterClient) ValidatingAdmissionPolicies
 
 func (c *AdmissionregistrationV1alpha1ClusterClient) ValidatingAdmissionPolicyBindings() ValidatingAdmissionPolicyBindingClusterInterface {
 	return &validatingAdmissionPolicyBindingsClusterInterface{clientCache: c.clientCache}
+}
+
+func (c *AdmissionregistrationV1alpha1ClusterClient) MutatingAdmissionPolicies() MutatingAdmissionPolicyClusterInterface {
+	return &mutatingAdmissionPoliciesClusterInterface{clientCache: c.clientCache}
+}
+
+func (c *AdmissionregistrationV1alpha1ClusterClient) MutatingAdmissionPolicyBindings() MutatingAdmissionPolicyBindingClusterInterface {
+	return &mutatingAdmissionPolicyBindingsClusterInterface{clientCache: c.clientCache}
 }
 
 // NewForConfig creates a new AdmissionregistrationV1alpha1ClusterClient for the given config.
