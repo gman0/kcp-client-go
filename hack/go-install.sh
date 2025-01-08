@@ -41,6 +41,9 @@ if [ -z "${GOBIN}" ]; then
   exit 1
 fi
 
+# An executable already exists, exit early.
+[[ -f "${GOBIN}/${2}" && -x $(realpath "${GOBIN}/${2}") ]] && exit 0
+
 rm -f "${GOBIN}/${2}"* || true
 
 # install the golang module specified as the first argument
