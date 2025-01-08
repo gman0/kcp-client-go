@@ -23,7 +23,7 @@ GOBIN_DIR=$(abspath ./bin )
 PATH := $(GOBIN_DIR):$(TOOLS_GOBIN_DIR):$(PATH)
 TMPDIR := $(shell mktemp -d)
 
-CODE_GENERATOR_VER := v2.3.0
+CODE_GENERATOR_VER := XXX_TODO
 CODE_GENERATOR_BIN := code-generator
 CODE_GENERATOR := $(TOOLS_DIR)/$(CODE_GENERATOR_BIN)
 export CODE_GENERATOR # so hack scripts can use it
