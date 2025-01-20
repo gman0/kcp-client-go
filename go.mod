@@ -8,7 +8,7 @@ require (
 	github.com/evanphx/json-patch v5.6.0+incompatible
 	github.com/google/gnostic-models v0.6.9
 	github.com/kcp-dev/apimachinery/v2 v2.0.1-0.20241230150911-cd7529a844f3
-	github.com/kcp-dev/logicalcluster/v3 v3.0.4
+	github.com/kcp-dev/logicalcluster/v3 v3.0.5
 	k8s.io/api v0.32.0
 	k8s.io/apiextensions-apiserver v0.32.0
 	k8s.io/apimachinery v0.32.0
